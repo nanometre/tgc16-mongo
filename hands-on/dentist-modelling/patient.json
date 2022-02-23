@@ -1,0 +1,26 @@
+[
+    {
+        "_id": 201,
+        "name": "Ace",
+        "contact": 91919191,
+        "email": "ace@gmail.com",
+        "insurance_type": "AIA",
+        "drugs": ["drug1", "drug2", "drug3"],
+        "address": "20 Lower Bedok Road",
+        "postal_code": 412356,
+        "dentist": {
+            "dentist_id":"101",
+            "name":"Keith Tan"
+        }
+    },
+    {
+        "_id": 202,
+        "name": "Paul",
+        "contact": 99393939,
+        "email": "paul@gmail.com",
+        "insurance_type": "AIA",
+        "drugs": ["drug4", "drug5", "drug6"],
+        "address": "10 Lower Bedok Road",
+        "postal_code": 412345
+    }
+]

@@ -1,0 +1,22 @@
+[
+    {
+        "_id": 999,
+        "location": "Trent Dental",
+        "address": "229 Mountbatten Road",
+        "opening_time": 900,
+        "closing_time": 1600,
+        "dentists": [
+            101, 102, 103, 115
+        ]
+    },
+    {
+        "_id": 998,
+        "location": "Redhill Dental",
+        "address": "229 Redhill Road",
+        "opening_time": 900,
+        "closing_time": 1600,
+        "dentists": [
+            116, 117, 118, 120
+        ] 
+    }
+]

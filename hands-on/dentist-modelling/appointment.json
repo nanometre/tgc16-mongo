@@ -1,0 +1,45 @@
+
+[
+    {
+        "_id": "123456",
+        "date": "2022-02-24",
+        "time": 1600,
+        "clinic": {
+            "_id": 301,
+            "name": "Nanyang Dental",
+            "address": "101 Orchard Plaza",
+            "postal_code":123456
+        },
+        "treatment": "cleaning", 
+        "dentist": {
+            "_id":101,
+            "name": "Keith Tan",
+            "contact": 91919191,
+            "treatment": ["cleaning", "filling"],
+            "clinic": [
+                {
+                    "_id": 301,
+                    "name": "Nanyang Dental",
+                    "address": "101 Orchard Plaza",
+                    "postal_code": 123456
+                },
+                {
+                    "_id": 302,
+                    "name": "Trent Dental",
+                    "address": "101 Tanjong Katong",
+                    "postal_code": 234567
+                }
+            ]
+        }, 
+        "patient": {
+            "_id": 201,
+            "name": "Ace",
+            "contact": 91919191,
+            "email": "ace@gmail.com",
+            "insurance_type": "AIA",
+            "drugs" : ["drug1, drug2, drug3"],
+            "address": "20 Lower Bedok Road",
+            "postal_code": 412356
+        }
+    }
+]

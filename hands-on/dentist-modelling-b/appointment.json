@@ -1,0 +1,11 @@
+[
+    {
+        "_id": "123456",
+        "date": "2022-02-24",
+        "time": 1600,
+        "clinic": 999,
+        "treatment": ["cleaning"],
+        "dentist": 101,
+        "patient": 201
+    }
+]

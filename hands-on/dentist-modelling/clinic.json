@@ -1,0 +1,39 @@
+[
+    {
+        "_id": 301,
+        "name": "Nanyang Dental",
+        "address": "101 Orchard Plaza",
+        "postal_code": 123456,
+        "dentist": [{
+            "_id": 101,
+            "name": "Keith Tan",
+            "contact": 91919191,
+            "treatment": ["cleaning", "filling"]
+        }]
+    },
+    {
+        "_id": 302,
+        "name": "Trent Dental",
+        "address": "101 Tanjong Katong",
+        "postal_code": 234567,
+        "dentist": [{
+                "_id": 101,
+                "name": "Keith Tan",
+                "contact": 91919191,
+                "treatment": ["cleaning", "filling"]
+            },
+            {
+                "_id": 102,
+                "name": "Henry Lai",
+                "contact": 92929292,
+                "treatment": ["cleaning", "filling", "crowning"]
+            }
+        ]
+    },
+    {
+        "_id": 303,
+        "name": "Redhill Dental",
+        "address": "101 Redhill Road",
+        "postal_code": 345678
+    }
+]

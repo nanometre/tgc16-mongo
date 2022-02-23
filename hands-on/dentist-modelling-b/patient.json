@@ -1,0 +1,12 @@
+[
+    {
+        "_id": 201,
+        "name": "Paul",
+        "contact": 91919292,
+        "email": "paul@gmail.com",
+        "street_name": "101 Upper Changi Road",
+        "postal_code": 456789, 
+        "insurance": ["AIA"],
+        "drugs": ["drug1", "drug2", "drug3"]
+    }
+]

@@ -1,0 +1,14 @@
+[
+    {
+        "_id": 101,
+        "name": "Henry Lai",
+        "contact" : 91991911,
+        "address": {
+            "street_name": "Yishun Ring Road",
+            "block_number": 171,
+            "postal_code":"S117171"
+        },
+        "treatments": ["cleaning", "crowning", "root canal"]
+
+}
+]
