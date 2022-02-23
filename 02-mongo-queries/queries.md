@@ -127,3 +127,87 @@ db.listingsAndReviews.find({
     'beds':1
 }).pretty()
 ```
+
+# Find by elements in array
+```
+db.listingsAndReviews.find({
+    'amenities':'Oven'
+}, {
+    'name': 1,
+    'amenities': 1
+}).pretty()
+```
+
+E.g. find all listings that have oven, OR microwave OR stove
+```
+db.listingsAndReviews.find({
+    'amenities':{
+        '$in': ['Oven', 'Microwave', 'Stove']
+    }
+}, {
+    'name': 1,
+    'amenities':1
+}).pretty()
+```
+
+E.g. $all will only match if everything in array is in amenities
+```
+db.listingsAndReviews.find({
+    'amenities':{
+        '$all': ['Oven', 'Microwave', 'Stove', 'Dishes and silverware']
+    }
+}, {
+    'name': 1,
+    'amenities':1
+}).pretty()
+```
+
+# Search by ObjectId
+Find the document in the movies collection that has the following
+ObjectId: 573a1390f29313caabcd4135
+```
+use sample_mflix;
+db.movies.find({
+    '_id':ObjectId('573a1390f29313caabcd4135')
+}).pretty()
+```
+
+# Logical Operators
+Back to the `sample_airbnb` database.
+e.g. Find all listing in Brazil or Canada:
+```
+db.listingsAndReviews.find({
+    '$or':[
+        {
+            'address.country': 'Brazil'
+        },
+        {
+            'address.country': 'Canada'
+        }
+    ]
+}, {
+    'name': 1,
+    'address.country': 1,
+}).pretty()
+```
+
+e.g. Find all listings in Brazil or Canada. The listings from Brazil must have more than 3 bedrooms.
+```
+db.listingsAndReviews.find({
+    '$or':[
+        {
+            'address.country':"Brazil",
+            'bedrooms':{
+                '$gt':3
+            }
+        },
+        {
+            'address.country':'Canada'
+        }
+    ]
+},{
+    'name':1,
+    'address.country':1,
+    'bedrooms':1
+}).pretty()
+```
