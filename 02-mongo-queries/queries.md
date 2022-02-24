@@ -113,7 +113,7 @@ db.listingsAndReviews.find({
 }).pretty()
 ```
 
-# Example: Find all listing in Brazil that has less than 4 bedrooms
+Example: Find all listing in Brazil that has less than 4 bedrooms
 ```
 db.listingsAndReviews.find({
     'address.country':'Brazil',
@@ -139,6 +139,7 @@ db.listingsAndReviews.find({
 ```
 
 E.g. find all listings that have oven, OR microwave OR stove
+$in is to find elements in an array
 ```
 db.listingsAndReviews.find({
     'amenities':{
@@ -151,6 +152,7 @@ db.listingsAndReviews.find({
 ```
 
 E.g. $all will only match if everything in array is in amenities
+$all is to find elements in an array
 ```
 db.listingsAndReviews.find({
     'amenities':{
@@ -209,5 +211,67 @@ db.listingsAndReviews.find({
     'name':1,
     'address.country':1,
     'bedrooms':1
+}).pretty()
+```
+
+# Find all listing that has been reviewed by Leslie
+In other words, we want to shortlist documents by a field in one of their embedded objects.
+$elemMatch is to match properties of objects
+```
+db.listingsAndReviews.find({
+    'reviews':{
+        '$elemMatch' : {
+            'reviewer_name': 'Leslie'
+        }
+    }
+},{
+    name: 1,
+    'reviews.$': 1
+}).pretty()
+```
+
+# Match by date
+The date in the ISO format: YYYY-MM-DD and we need to wrap it with a function
+Find all listing that have been reviewed before 2019
+```
+db.listingsAndReviews.find({
+    first_review: {
+        $lte: ISODate('2018-12-31')
+    }
+}, {
+    name: 1,
+    first_review: 1
+}).pretty()
+```
+
+# Find by string pattern (i.e. regular expressions)
+Find all the listings where the name includes the word 'spacious'
+Note: the `i` for the `$options` means case insensitive comparison
+```
+db.listingsAndReviews.find({
+    name: {
+        $regex: 'Spacious', $options: 'i'
+    }
+},{
+    name: 1
+}).pretty()
+```
+
+# Counting results
+Count all the number of listings
+```
+db.listingsAndReviews.find().count()
+```
+
+# We find all listings that have at least 6 amenities
+To find if a listing have 6 or more amenities, we'll check if the 6th element of the amneities array exists:
+```
+db.listingsAndReviews.find({
+    'amenities.5' : {
+        $exists: true
+    }
+}, {
+    'name':1,
+    'amenities':1
 }).pretty()
 ```
