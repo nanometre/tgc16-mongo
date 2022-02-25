@@ -1,0 +1,32 @@
+{{#extends 'base'}}
+
+{{#block 'content'}}
+<a href="/animal/add" class="btn btn-primary">Add New</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    {{#each animals}}
+        <tr>
+            <td>{{this._id}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.age}}</td>
+            <td>{{this.type}}</td>
+            <td>{{this.gender}}</td>
+            <td>{{this.notes}}</td>
+        </tr>
+    {{/each}}
+</table>
+    {{#each allAnimals}}
+        {{this.name}}
+    {{/each}}
+{{/block}}
+
+{{/extends}}

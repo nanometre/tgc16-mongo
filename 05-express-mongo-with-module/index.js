@@ -27,11 +27,23 @@ async function main() {
     // SETUP ROUTES
     app.get('/', async function (req, res) {
         const data = await getDB().collection('listingsAndReviews') // select the listingsAndReviews collection
-            .find({})
+            .find({
+                'beds': {
+                    $gte:3
+                }
+            }, {
+                'projection': {
+                    name: 1,
+                    // description: 1,
+                    beds: 1
+                }
+            })
             .limit(10)
             .toArray(); // find all documents
 
-        res.send(data);
+        res.render('listings.hbs', {
+            'listings': data
+        });
     })
 }
 
