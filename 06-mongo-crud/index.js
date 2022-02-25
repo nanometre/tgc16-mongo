@@ -7,6 +7,13 @@ const {
     getDB
 } = require('./MongoUtil');
 
+const ObjectId = require('mongodb').ObjectId;
+const helpers = require('handlebars-helpers')(
+    {
+        'handlebars': hbs.handlebars
+    }
+)
+
 const app = express();
 app.set('view engine', 'hbs');
 
@@ -16,7 +23,7 @@ wax.setLayoutPath('./views/layouts');
 // for forms to work
 app.use(express.urlencoded({
     extended:false
-}))
+}));
 
 async function main() {
     // connect to the mongodb
@@ -27,28 +34,27 @@ async function main() {
     app.get('/', async function (req, res) {
         const db = getDB();
         let allFood = await db.collection('food_records').find({}).toArray();
-        res.render('all_food', {
-            'foodRecords': allFood
+        res.render('all_food.hbs',{
+            'foodRecords':allFood
         })
     })
 
     app.get('/food/add', async function(req,res){
-        // read in all the possible tags (no hard coding method of generating checkboxes)
+        // read in all the possible tags
         // const db = getDB();
-        // let allTags = await db.collection("all_tags").find().toArray();
+        // let allTags = await db.collection('all_tags').find().toArray();
         res.render('add_food.hbs',{
-            // tags: allTags
+            // 'tags': allTags
         })
     })
 
     app.post('/food/add', async function(req,res){
-         // step 1. extract info from form
+        // step 1. extract info from form
         // let foodName = req.body.foodName;
         // let calories = req.body.calories;
         // let tags = req.body.tags;
         let { foodName, calories, tags} = req.body;  // <-- object destructuring
-        // let tagArray = tags.split(',');
-
+       
         // convert tags to be an array if it is not an array
         let tagArray = [];
         // check if tags is not undefined or null or empty string (meaning the user selects at least one checkbox)
@@ -72,6 +78,48 @@ async function main() {
         });
 
         res.send("form recieved");
+    })
+
+    app.get('/food/:food_id/edit', async function(req,res){
+        // get the record with the id in the parameter
+        let foodRecord = await getDB().collection('food_records').findOne({
+            '_id': ObjectId(req.params.food_id)
+        })
+
+        res.render('edit_food.hbs',{
+            'food':foodRecord
+        })
+    })
+
+    app.post('/food/:food_id/edit', async function(req, res){
+        let tags = req.body.tags || [];
+        tags = Array.isArray(tags) ? tags : [tags];
+        
+        let foodDocument = {
+            'name': req.body.foodName,
+            'calories': req.body.calories,
+            'tags': tags
+        }
+
+        // await getDB().collection('food_records').updateOne({
+        //     '_id': ObjectId(req.params.food_id)
+        // }, {
+        //     $set:{
+        //         name: foodDocument.name,
+        //         calories: foodDocument.calories,
+        //         tags: foodDocument.tags
+        //     }
+        // })
+
+        await getDB().collection('food_records').updateOne({
+            '_id': ObjectId(req.params.food_id)
+        },{
+            '$set': {
+                ...foodDocument  // spread operator
+            }
+        })
+
+        res.redirect('/')
     })
 }
 
