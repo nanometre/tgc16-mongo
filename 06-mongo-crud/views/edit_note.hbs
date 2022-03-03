@@ -1,0 +1,13 @@
+{{#extends 'base'}}
+
+{{#block "content"}}
+<form method="POST">
+    <div>
+        <label>Note:</label>
+        <textarea class="form-control" name="note_content">{{foodRecord.notes.0.content}}</textarea>
+    </div>
+    <input type="submit" class="btn btn-primary btn-sm mt-3"/>
+</form>
+{{/block}}
+
+{{/extends}}
